@@ -1,0 +1,40 @@
+/** It is better to create all the buttons in User Event Script than Client Script.
+  * Each button js file must have a Client file to add action with after button click
+**/
+
+/**
+ * @NApiVersion 2.x
+ * @NScriptType UserEventScript
+ * @NModuleScope SameAccount
+ */
+define([],
+
+function() {
+   
+    /**
+     * Function definition to be triggered before record is loaded.
+     *
+     * @param {Object} scriptContext
+     * @param {Record} scriptContext.newRecord - New record
+     * @param {string} scriptContext.type - Trigger type
+     * @param {Form} scriptContext.form - Current form
+     * @Since 2015.2
+     */
+	
+	var exports = {};
+	
+    function beforeLoad(scriptContext) {
+    	scriptContext.form.addButton({
+    		   id: "custpage_mybutton",
+            label: "Email All Invoice!",
+            functionName: "onButtonClick"
+    	});
+      
+       scriptContext.form.clientScriptModulePath = "SuiteScripts/EmailSaveSearchInvocieCustomer.js";
+
+      log.debug();
+    }
+
+    exports.beforeLoad = beforeLoad;
+    return exports;  
+});
